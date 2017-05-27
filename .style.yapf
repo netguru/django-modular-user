@@ -1,0 +1,7 @@
+[style]
+based_on_style = pep8
+use_tabs = true
+indent_width = 1
+column_limit = 9999
+space_between_ending_comma_and_closing_bracket = false
+spaces_before_comment = 1

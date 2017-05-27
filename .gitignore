@@ -1,0 +1,6 @@
+*.pyc
+*.egg-info
+build
+dist
+manage.py
+db.sqlite3

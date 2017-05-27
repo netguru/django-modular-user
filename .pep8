@@ -1,0 +1,3 @@
+[pep8]
+ignore=E101,E11,E121,E251,E26
+max-line-length=9999
