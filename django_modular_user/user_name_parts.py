@@ -17,7 +17,7 @@ class NamePartsMixin(models.Model):
 	@property
 	def name(self):
 		# Split/join this way because the name fields can contain spaces.
-		return ''.join('{} {} {}'.format(self.given_name, self.middle_name, self.family_name).split())
+		return ' '.join('{} {} {}'.format(self.given_name, self.middle_name, self.family_name).split())
 
 	def get_full_name(self):
 		return self.name
