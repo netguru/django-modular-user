@@ -1,5 +1,6 @@
 import uuid
 
+from django.conf import settings
 from django.db import models
 
 
@@ -44,7 +45,7 @@ class AbstractBaseUser(models.Model):
 	is_staff = False
 
 	REQUIRED_FIELDS = []
-	USERNAME_FIELD = 'id'
+	USERNAME_FIELD = getattr(settings, 'USERNAME_FIELD', None) or 'id'
 
 	class Meta:
 		abstract = True

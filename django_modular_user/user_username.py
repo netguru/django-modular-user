@@ -1,5 +1,6 @@
 import unicodedata
 
+from django.conf import settings
 from django.contrib.auth.validators import UnicodeUsernameValidator
 from django.db import models
 from django.utils.translation import gettext_lazy as _
@@ -13,7 +14,8 @@ class UsernameMixin(models.Model):
 	class Meta:
 		abstract = True
 
-	USERNAME_FIELD = 'username'
+	if getattr(settings, 'USERNAME_FIELD', None) is None:
+		USERNAME_FIELD = 'username'
 
 	_username_validator = UnicodeUsernameValidator()
 
