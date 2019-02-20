@@ -7,7 +7,7 @@ with open('README.md') as f:
 
 setup(
 	name = "django-modular-user",
-	version = "0.0.1",
+	version = "0.1.0",
 	description = "Modular user model for Django",
 	long_description = readme,
 	author = "Aiakos Contributors",
