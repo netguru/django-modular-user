@@ -59,9 +59,3 @@ class AbstractBaseUser(models.Model):
 
 	def natural_key(self):
 		return (self.get_username(),)
-
-	def get_full_name(self): # TODO remove in Django 2.0
-		return ''
-
-	def get_short_name(self): # TODO remove in Django 2.0
-		return ''
