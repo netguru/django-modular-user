@@ -21,11 +21,11 @@ class UsernameMixin(models.Model):
 
 	username = models.CharField(
 		_('username'),
-		max_length=150,
-		unique=True,
-		help_text=_('Required. 150 characters or fewer. Letters, digits and @/./+/-/_ only.'),
-		validators=[_username_validator],
-		error_messages={
+		max_length = 150,
+		unique = True,
+		help_text = _('Required. 150 characters or fewer. Letters, digits and @/./+/-/_ only.'),
+		validators = [_username_validator],
+		error_messages = {
 			'unique': _("A user with that username already exists."),
 		},
 	)
@@ -35,9 +35,7 @@ class UsernameMixin(models.Model):
 		self.username = normalize_username(self.username)
 
 	class Admin:
-		fieldsets = (
-			(None, dict(fields = ('username',))),
-		)
+		fieldsets = ((None, dict(fields = ('username',))),)
 		list_display = ('username',)
 		search_fields = ('username',)
 		ordering = ('username',)

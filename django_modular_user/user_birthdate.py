@@ -6,9 +6,7 @@ class BirthdateMixin(models.Model):
 	class Meta:
 		abstract = True
 
-	birthdate = models.DateField(_('birthdate'), blank=True, null=True)
+	birthdate = models.DateField(_('birthdate'), blank = True, null = True)
 
 	class Admin:
-		fieldsets = (
-			(_('Profile'), dict(fields = ('birthdate',))),
-		)
+		fieldsets = ((_('Profile'), dict(fields = ('birthdate',))),)

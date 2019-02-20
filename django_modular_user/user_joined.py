@@ -7,9 +7,7 @@ class JoinedMixin(models.Model):
 	class Meta:
 		abstract = True
 
-	date_joined = models.DateTimeField(_('date joined'), default=timezone.now)
+	date_joined = models.DateTimeField(_('date joined'), default = timezone.now)
 
 	class Admin:
-		fieldsets = (
-			(_('Important dates'), dict(fields = ('date_joined',))),
-		)
+		fieldsets = ((_('Important dates'), dict(fields = ('date_joined',))),)

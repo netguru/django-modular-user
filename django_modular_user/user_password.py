@@ -5,7 +5,7 @@ from django.utils.crypto import get_random_string, salted_hmac
 from django.utils.translation import gettext_lazy as _
 
 
-def make_random_password(self, length=10, allowed_chars='abcdefghjkmnpqrstuvwxyzABCDEFGHJKLMNPQRSTUVWXYZ23456789'):
+def make_random_password(self, length = 10, allowed_chars = 'abcdefghjkmnpqrstuvwxyzABCDEFGHJKLMNPQRSTUVWXYZ23456789'):
 	"""
 	Generate a random password with the given length and given
 	allowed_chars. The default value of allowed_chars does not have "I" or
@@ -18,12 +18,10 @@ class PasswordMixin(models.Model):
 	class Meta:
 		abstract = True
 
-	password = models.CharField(_('password'), max_length=128)
+	password = models.CharField(_('password'), max_length = 128)
 
 	class Admin:
-		fieldsets = (
-			(None, dict(fields = ('password',))),
-		)
+		fieldsets = ((None, dict(fields = ('password',))),)
 
 	def __init__(self, *args, **kwargs):
 		super().__init__(*args, **kwargs)
@@ -46,11 +44,13 @@ class PasswordMixin(models.Model):
 		Return a boolean of whether the raw_password was correct. Handles
 		hashing formats behind the scenes.
 		"""
+
 		def setter(raw_password):
 			self.set_password(raw_password)
 			# Password hash upgrades shouldn't be considered password changes.
 			self._password = None
-			self.save(update_fields=["password"])
+			self.save(update_fields = ["password"])
+
 		return check_password(raw_password, self.password, setter)
 
 	def set_unusable_password(self):

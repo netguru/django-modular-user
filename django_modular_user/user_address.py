@@ -6,12 +6,12 @@ class AddressMixin(models.Model):
 	class Meta:
 		abstract = True
 
-	address_formatted = models.TextField(_("formatted address"), blank=True, null=True)
-	address_street = models.CharField(_("street"), max_length=200, blank=True, null=True)
-	address_locality = models.CharField(_("locality"), max_length=200, blank=True, null=True)
-	address_region = models.CharField(_("region"), max_length=200, blank=True, null=True)
-	address_postal_code = models.CharField(_("postal code"), max_length=50, blank=True, null=True)
-	address_country = models.CharField(_("country"), max_length=50, blank=True, null=True)
+	address_formatted = models.TextField(_("formatted address"), blank = True, null = True)
+	address_street = models.CharField(_("street"), max_length = 200, blank = True, null = True)
+	address_locality = models.CharField(_("locality"), max_length = 200, blank = True, null = True)
+	address_region = models.CharField(_("region"), max_length = 200, blank = True, null = True)
+	address_postal_code = models.CharField(_("postal code"), max_length = 50, blank = True, null = True)
+	address_country = models.CharField(_("country"), max_length = 50, blank = True, null = True)
 
 	@property
 	def address(self):
@@ -39,6 +39,4 @@ class AddressMixin(models.Model):
 			self.address_formatted = '\n'.join(parts)
 
 	class Admin:
-		fieldsets = (
-			(_("Address"), dict(fields = ('address_formatted', 'address_street', 'address_locality', 'address_region', 'address_postal_code', 'address_country',))),
-		)
+		fieldsets = ((_("Address"), dict(fields = ('address_formatted', 'address_street', 'address_locality', 'address_region', 'address_postal_code', 'address_country'))),)

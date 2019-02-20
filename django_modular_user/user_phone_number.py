@@ -23,15 +23,13 @@ class PhoneNumberMixin(models.Model):
 	class Meta:
 		abstract = True
 
-	phone_number = PhoneNumberField(_('phone number'), blank=True, null=True, unique=UNIQUE)
+	phone_number = PhoneNumberField(_('phone number'), blank = True, null = True, unique = UNIQUE)
 
 	def clean(self):
 		super().clean()
 		self.phone_number = normalize_phone_number(self.phone_number)
 
 	class Admin:
-		fieldsets = (
-			(None, dict(fields = ('phone_number',))),
-		)
+		fieldsets = ((None, dict(fields = ('phone_number',))),)
 		list_display = ('phone_number',)
 		search_fields = ('phone_number',)

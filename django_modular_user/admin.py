@@ -14,8 +14,8 @@ from django.template.response import TemplateResponse
 from django.urls import reverse
 from django.utils.decorators import method_decorator
 from django.utils.html import escape
-from django.utils.translation import gettext_lazy as _
 from django.utils.translation import gettext
+from django.utils.translation import gettext_lazy as _
 from django.views.decorators.csrf import csrf_protect
 from django.views.decorators.debug import sensitive_post_parameters
 
@@ -45,13 +45,13 @@ def _discover(prop):
 	return sum(__discover(prop), ())
 
 
-def _discover_fieldsets(prop, no_password=False):
+def _discover_fieldsets(prop, no_password = False):
 	data = __discover(prop)
 
 	out = OrderedDict()
 	for categories in data:
 		for name, desc in categories:
-			out.setdefault(name, dict(fields=[], classes=['collapse', 'in'] if name else ['']))
+			out.setdefault(name, dict(fields = [], classes = ['collapse', 'in'] if name else ['']))
 			for field in desc['fields']:
 				if no_password and field == 'password':
 					continue
@@ -68,14 +68,14 @@ class UserAdmin(admin.ModelAdmin):
 	change_password_form = AdminPasswordChangeForm
 
 	fieldsets = _discover_fieldsets('fieldsets')
-	add_fieldsets = _discover_fieldsets('fieldsets', no_password=True)
+	add_fieldsets = _discover_fieldsets('fieldsets', no_password = True)
 	list_display = _discover('list_display')
 	list_filter = _discover('list_filter')
 	search_fields = _discover('search_fields')
 	ordering = _discover('ordering')
 	filter_horizontal = _discover('filter_horizontal')
 
-	def get_fieldsets(self, request, obj=None):
+	def get_fieldsets(self, request, obj = None):
 		if not obj:
 			return self.add_fieldsets
 		return super().get_fieldsets(request, obj)
@@ -85,7 +85,7 @@ class UserAdmin(admin.ModelAdmin):
 			url(
 				r'^(.+)/password/$',
 				self.admin_site.admin_view(self.user_change_password),
-				name='auth_user_password_change',
+				name = 'auth_user_password_change',
 			),
 		] + super().get_urls()
 
@@ -97,11 +97,11 @@ class UserAdmin(admin.ModelAdmin):
 
 	@sensitive_post_parameters_m
 	@csrf_protect_m
-	def add_view(self, request, form_url='', extra_context=None):
-		with transaction.atomic(using=router.db_for_write(self.model)):
+	def add_view(self, request, form_url = '', extra_context = None):
+		with transaction.atomic(using = router.db_for_write(self.model)):
 			return self._add_view(request, form_url, extra_context)
 
-	def _add_view(self, request, form_url='', extra_context=None):
+	def _add_view(self, request, form_url = '', extra_context = None):
 		# It's an error for a user to have add permission but NOT change
 		# permission for users. If we allowed such users to add users, they
 		# could create superusers, which would mean they would essentially have
@@ -112,11 +112,7 @@ class UserAdmin(admin.ModelAdmin):
 			if self.has_add_permission(request) and settings.DEBUG:
 				# Raise Http404 in debug mode so that the user gets a helpful
 				# error message.
-				raise Http404(
-					'Your user does not have the "Change user" permission. In '
-					'order to add users, Django requires that your user '
-					'account have both the "Add user" and "Change user" '
-					'permissions set.')
+				raise Http404('Your user does not have the "Change user" permission. In order to add users, Django requires that your user account have both the "Add user" and "Change user" permissions set.')
 			raise PermissionDenied
 		if extra_context is None:
 			extra_context = {}
@@ -129,7 +125,7 @@ class UserAdmin(admin.ModelAdmin):
 		return super().add_view(request, form_url, extra_context)
 
 	@sensitive_post_parameters_m
-	def user_change_password(self, request, id, form_url=''):
+	def user_change_password(self, request, id, form_url = ''):
 		if not self.has_change_permission(request):
 			raise PermissionDenied
 		user = self.get_object(request, unquote(id))
@@ -147,16 +143,14 @@ class UserAdmin(admin.ModelAdmin):
 				msg = gettext('Password changed successfully.')
 				messages.success(request, msg)
 				update_session_auth_hash(request, form.user)
-				return HttpResponseRedirect(
-					reverse(
-						'%s:%s_%s_change' % (
-							self.admin_site.name,
-							user._meta.app_label,
-							user._meta.model_name,
-						),
-						args=(user.pk,),
-					)
-				)
+				return HttpResponseRedirect(reverse(
+					'%s:%s_%s_change' % (
+						self.admin_site.name,
+						user._meta.app_label,
+						user._meta.model_name,
+					),
+					args = (user.pk,),
+				))
 		else:
 			form = self.change_password_form(user)
 
@@ -185,12 +179,11 @@ class UserAdmin(admin.ModelAdmin):
 
 		return TemplateResponse(
 			request,
-			self.change_user_password_template or
-			'admin/auth/user/change_password.html',
+			self.change_user_password_template or 'admin/auth/user/change_password.html',
 			context,
 		)
 
-	def response_add(self, request, obj, post_url_continue=None):
+	def response_add(self, request, obj, post_url_continue = None):
 		"""
 		Determine the HttpResponse for the add_view stage. It mostly defers to
 		its superclass implementation but is customized because the User model

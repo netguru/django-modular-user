@@ -6,9 +6,9 @@ class NamePartsMixin(models.Model):
 	class Meta:
 		abstract = True
 
-	given_name = models.CharField(_('given name'), max_length=200, blank=True, null=True)
-	middle_name = models.CharField(_('middle name'), max_length=200, blank=True, null=True)
-	family_name = models.CharField(_('family name'), max_length=200, blank=True, null=True)
+	given_name = models.CharField(_('given name'), max_length = 200, blank = True, null = True)
+	middle_name = models.CharField(_('middle name'), max_length = 200, blank = True, null = True)
+	family_name = models.CharField(_('family name'), max_length = 200, blank = True, null = True)
 
 	@property
 	def nickname(self):
@@ -28,8 +28,6 @@ class NamePartsMixin(models.Model):
 		return self.nickname
 
 	class Admin:
-		list_display = ('nickname', 'name',)
-		search_fields = ('given_name', 'middle_name', 'family_name',)
-		fieldsets = (
-			(_('Profile'), dict(fields = ('given_name', 'middle_name', 'family_name',))),
-		)
+		list_display = ('nickname', 'name')
+		search_fields = ('given_name', 'middle_name', 'family_name')
+		fieldsets = ((_('Profile'), dict(fields = ('given_name', 'middle_name', 'family_name'))),)

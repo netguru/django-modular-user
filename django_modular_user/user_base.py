@@ -14,7 +14,7 @@ class UserManager(models.Manager):
 		user = self.model(**data)
 		user.clean()
 		user.set_password(password)
-		user.save(using=self._db)
+		user.save(using = self._db)
 		return user
 
 	def create_user(self, **data):
@@ -37,7 +37,7 @@ class UserManager(models.Manager):
 class AbstractBaseUser(models.Model):
 	objects = UserManager()
 
-	id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+	id = models.UUIDField(primary_key = True, default = uuid.uuid4, editable = False)
 
 	is_anonymous = False
 	is_authenticated = True

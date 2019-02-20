@@ -27,15 +27,13 @@ class EmailMixin(models.Model):
 	class Meta:
 		abstract = True
 
-	email = models.EmailField(_('email address'), blank=True, null=True, unique=UNIQUE)
+	email = models.EmailField(_('email address'), blank = True, null = True, unique = UNIQUE)
 
 	def clean(self):
 		super().clean()
 		self.email = normalize_email(self.email)
 
 	class Admin:
-		fieldsets = (
-			(None, dict(fields = ('email',))),
-		)
+		fieldsets = ((None, dict(fields = ('email',))),)
 		list_display = ('email',)
 		search_fields = ('email',)
