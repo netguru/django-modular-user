@@ -10,6 +10,8 @@ except AttributeError:
 
 
 def normalize_phone_number(phone_number):
+	if phone_number is None:
+		return None
 	return phone_number.strip().replace(' ', '').replace('-', '')
 
 
@@ -27,7 +29,7 @@ class PhoneNumberMixin(models.Model):
 	class Meta:
 		abstract = True
 
-	phone_number = PhoneNumberField(_('phone number'), blank=True, unique=UNIQUE)
+	phone_number = PhoneNumberField(_('phone number'), blank=True, null=True, unique=UNIQUE)
 
 	def clean(self):
 		super().clean()

@@ -6,8 +6,8 @@ class FullNameMixin(models.Model):
 	class Meta:
 		abstract = True
 
-	name = models.CharField(_('full name'), max_length=200, blank=True)
-	nickname = models.CharField(_('nickname'), max_length=200, blank=True)
+	name = models.CharField(_('full name'), max_length=200, blank=True, null=True)
+	nickname = models.CharField(_('nickname'), max_length=200, blank=True, null=True)
 
 	def get_full_name(self):
 		return self.name

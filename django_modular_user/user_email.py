@@ -12,7 +12,8 @@ def normalize_email(email):
 	"""
 	Normalize the email address by lowercasing the domain part of it.
 	"""
-	email = email or ''
+	if email is None:
+		return None
 	try:
 		email_name, domain_part = email.strip().rsplit('@', 1)
 	except ValueError:
@@ -26,7 +27,7 @@ class EmailMixin(models.Model):
 	class Meta:
 		abstract = True
 
-	email = models.EmailField(_('email address'), blank=True, unique=UNIQUE)
+	email = models.EmailField(_('email address'), blank=True, null=True, unique=UNIQUE)
 
 	def clean(self):
 		super().clean()
