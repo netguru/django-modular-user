@@ -7,6 +7,7 @@ from django.utils.translation import gettext_lazy as _
 from .user_active import ActiveMixin
 from .user_address import AddressMixin
 from .user_base import AbstractBaseUser
+from .user_birthdate import BirthdateMixin
 from .user_email import EmailMixin
 from .user_joined import JoinedMixin
 from .user_lastlogin import LastLoginMixin
@@ -18,7 +19,7 @@ from .user_phone_number import PhoneNumberMixin
 from .user_staff import StaffMixin
 from .user_username import UsernameMixin
 
-__all__ = ['AbstractBaseUser', 'UsernameMixin', 'EmailMixin', 'PhoneNumberMixin', 'FullNameMixin', 'NamePartsMixin', 'PasswordMixin', 'ActiveMixin', 'StaffMixin', 'PermissionsMixin', 'LastLoginMixin', 'JoinedMixin', 'AddressMixin']
+__all__ = ['AbstractBaseUser', 'UsernameMixin', 'EmailMixin', 'PhoneNumberMixin', 'FullNameMixin', 'NamePartsMixin', 'PasswordMixin', 'ActiveMixin', 'StaffMixin', 'PermissionsMixin', 'LastLoginMixin', 'JoinedMixin', 'BirthdateMixin', 'AddressMixin']
 
 try:
 	CORE_MODULES = settings.USER_CORE_MODULES
