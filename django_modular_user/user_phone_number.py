@@ -19,9 +19,11 @@ phone_regex = RegexValidator(regex=r'^\+\d{8,15}$', message=_("Phone number must
 
 
 class PhoneNumberField(models.CharField):
+	default_validators = [phone_regex]
+	description = _("Phone number")
+
 	def __init__(self, *args, **kwargs):
-		kwargs['max_length'] = 20
-		kwargs['validators'] = [phone_regex]
+		kwargs.setdefault('max_length', 20)
 		super().__init__(*args, **kwargs)
 
 
