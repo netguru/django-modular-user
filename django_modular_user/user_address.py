@@ -16,22 +16,27 @@ class AddressMixin(models.Model):
 	@property
 	def address(self):
 		return {
-			"formatted": self.address_formatted,
-			"street_address": self.address_street,
-			"locality": self.address_locality,
-			"region": self.address_region,
-			"postal_code": self.address_postal_code,
-			"country": self.address_country,
+			'formatted': self.address_formatted,
+			'street_address': self.address_street,
+			'locality': self.address_locality,
+			'region': self.address_region,
+			'postal_code': self.address_postal_code,
+			'country': self.address_country,
 		}
 
 	@address.setter
 	def address(self, v):
-		self.address_formatted = v.get("formatted", "")
-		self.address_street = v.get("street_address", "")
-		self.address_locality = v.get("locality", "")
-		self.address_region = v.get("region", "")
-		self.address_postal_code = v.get("postal_code", "")
-		self.address_country = v.get("country", "")
+		self.address_formatted = v.get('formatted')
+		self.address_street = v.get('street_address')
+		self.address_locality = v.get('locality')
+		self.address_region = v.get('region')
+		self.address_postal_code = v.get('postal_code')
+		self.address_country = v.get('country')
+
+		if self.address_formatted is None and self.address_country is not None:
+			parts = [self.address_street, self.address_locality, self.address_region, self.address_postal_code, self.address_country.upper()]
+			parts = [p for p in parts if p is not None]
+			self.address_formatted = '\n'.join(parts)
 
 	class Admin:
 		fieldsets = (
