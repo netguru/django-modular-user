@@ -15,17 +15,21 @@ class AddressMixin(models.Model):
 
 	@property
 	def address(self):
-		return {
-			'formatted': self.address_formatted,
-			'street_address': self.address_street,
-			'locality': self.address_locality,
-			'region': self.address_region,
-			'postal_code': self.address_postal_code,
-			'country': self.address_country,
-		}
+		if self.address_formatted or self.address_street or self.address_locality or self.address_region or self.address_postal_code or self.address_country:
+			return dict(
+				formatted = self.address_formatted,
+				street_address = self.address_street,
+				locality = self.address_locality,
+				region = self.address_region,
+				postal_code = self.address_postal_code,
+				country = self.address_country,
+			)
 
 	@address.setter
 	def address(self, v):
+		if v is None:
+			v = {}
+
 		self.address_formatted = v.get('formatted')
 		self.address_street = v.get('street_address')
 		self.address_locality = v.get('locality')
