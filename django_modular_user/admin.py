@@ -74,6 +74,7 @@ class UserAdmin(admin.ModelAdmin):
 	search_fields = _discover('search_fields')
 	ordering = _discover('ordering')
 	filter_horizontal = _discover('filter_horizontal')
+	readonly_fields = _discover('readonly_fields')
 
 	def get_fieldsets(self, request, obj = None):
 		if not obj:
