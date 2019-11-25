@@ -51,7 +51,7 @@ def _discover_fieldsets(prop, no_password = False):
 	out = OrderedDict()
 	for categories in data:
 		for name, desc in categories:
-			out.setdefault(name, dict(fields = [], classes = ['collapse', 'in'] if name else ['']))
+			out.setdefault(name, dict(fields = [], classes = ['']))
 			for field in desc['fields']:
 				if no_password and field == 'password':
 					continue
